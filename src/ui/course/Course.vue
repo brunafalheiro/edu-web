@@ -116,6 +116,7 @@
     DialogTitle,
     DialogTrigger,
   } from '@/components/ui/dialog'
+  import { storage } from "@lib/utils/utils";
 
   const router = useRouter();
   const route = useRoute();
@@ -145,7 +146,7 @@
 
   const updateTopicStatus = async () => {
     const { courseId, classId, topicId } = route.params;
-    const progress = await window.store.get("progress");
+    const progress = await storage.get("progress");
     const completedContent = progress?.[courseId]?.completedContent || {};
     const topics = completedContent[classId];
 
@@ -184,7 +185,7 @@
     router.push(`/course/${courseId}/info`);
   }
 
-  const updateProgress = async (progress) => await window.store.set("progress", progress);
+  const updateProgress = async (progress) => await storage.set("progress", progress);
   const navigateToTopic = (courseId, classId, topicId) => {
     router.push(`/course/${courseId}/${classId}/${topicId}`);
   };
@@ -198,7 +199,7 @@
 
   const goToNextTopic = async () => {
     const { courseId, classId, topicId } = route.params;
-    const progress = (await window.store.get("progress")) || {};
+    const progress = (await storage.get("progress")) || {};
     const courseProgress = progress[courseId] || {};
     const completedContent = courseProgress.completedContent || {};
 
@@ -282,7 +283,7 @@
     }));
 
     // Check if course is completed when loading
-    const progress = await window.store.get("progress");
+    const progress = await storage.get("progress");
     const courseProgress = progress?.[courseId] || {};
     const completedContent = courseProgress.completedContent || {};
     

@@ -102,12 +102,8 @@
 <script setup>
 import { ref, watch, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { storage } from '@lib/utils/utils';
 
 const props = defineProps({ classes: Array });
 
@@ -116,7 +112,7 @@ const route = useRoute();
 const activeAccordion = ref(route.params.classId || null);
 
 const fetchProgress = async () => {
-  progress.value = (await window.store.get("progress")) || {};
+  progress.value = (await storage.get("progress")) || {};
 };
 
 const courseId = route.params.courseId;

@@ -67,6 +67,7 @@
   import Button from "@components/ui/button/Button.vue";
   import { ref } from "vue";
   import { useRouter } from "vue-router";
+  import { storage } from "@lib/utils/utils";
 
   const router = useRouter();
   const courseId = router.currentRoute.value.params.courseId;
@@ -85,7 +86,7 @@
   const coursesProgress = ref({});
 
   const checkCourseStatus = async () => {
-    coursesProgress.value = (await window.store.get("progress")) || {};
+    coursesProgress.value = (await storage.get("progress")) || {};
     const course = coursesProgress.value[courseId];
     isOngoingCourse.value = course ? !course.completed : false;
     isCompletedCourse.value = course ? course.completed : false;
@@ -94,7 +95,7 @@
   checkCourseStatus();
 
   const startCourse = async () => {
-    const progress = (await window.store.get("progress")) || {};
+    const progress = (await storage.get("progress")) || {};
     const classId = 1;
     const topicId = 1;
 
@@ -113,12 +114,12 @@
       completedContent,
     };
 
-    await window.store.set("progress", progress);
+    await storage.set("progress", progress);
     router.push(`/course/${courseId}/${classId}/${topicId}`);
   };
 
   const goToClass = async () => {
-    const progress = (await window.store.get("progress")) || {};
+    const progress = (await storage.get("progress")) || {};
     const currentProgress = progress[courseId];
     const classId = currentProgress.currentClass;
     const topicId = currentProgress.currentTopic;

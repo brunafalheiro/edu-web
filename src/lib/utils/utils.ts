@@ -13,3 +13,17 @@ export function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref
       ? updaterOrValue(ref.value)
       : updaterOrValue
 }
+
+export const storage = {
+  async get(key: string) {
+    const value = localStorage.getItem(key);
+    try {
+      return value ? JSON.parse(value) : null;
+    } catch {
+      return null;
+    }
+  },
+  async set(key: string, value: any) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};

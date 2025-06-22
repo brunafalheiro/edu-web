@@ -6,9 +6,10 @@
       </div>
 
       <div class="w-full flex">
-        <div class="w-fulL border-2 border-black rounded-lg p-6 mr-4">
+        <div class="w-fulL border-2 border-black rounded-lg p-6 pt-4 mr-4">
           <!-- Question rendering with support for text and images -->
           <div class="mt-2 mb-8">
+            <span class="inline-block mb-4 px-2 py-1 text-xs font-semibold bg-lavender-ultralight text-gray-700 rounded">Exercício {{ currentExercise }}</span>
             <div v-if="Array.isArray(currentExerciseData.question)" v-for="(item, index) in currentExerciseData.question" :key="index">
               <p v-if="item.type === 'text'" class="text-lg font-medium text-gray-800 mb-4">{{ item.value }}</p>
               <img 
@@ -151,6 +152,7 @@
   import BackButton from '@/components/ui/BackButton.vue';
   import Button from '@components/ui/button/Button.vue';
   import exercises from '@database/exercises.json';
+  import { storage } from '@lib/utils/utils';
 
   const route = useRoute();
   const router = useRouter();
@@ -193,7 +195,7 @@
   };
 
   const updateExerciseProgress = async (isCorrect, answer = null) => {
-    const progress = (await window.store.get("exerciseProgress")) || {};
+    const progress = (await storage.get("exerciseProgress")) || {};
     if (!progress[courseId]) progress[courseId] = {};
 
     progress[courseId][currentExercise.value] = {
@@ -202,7 +204,7 @@
       ...(answer && { answer })
     };
 
-    await window.store.set("exerciseProgress", progress);
+    await storage.set("exerciseProgress", progress);
     exerciseProgress.value = progress[courseId];
   };
 
@@ -242,7 +244,7 @@
   };
 
   onMounted(async () => {
-    const progress = (await window.store.get("exerciseProgress")) || {};
+    const progress = (await storage.get("exerciseProgress")) || {};
     exerciseProgress.value = progress[courseId] || {};
   });
 </script>

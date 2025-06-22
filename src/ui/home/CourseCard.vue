@@ -50,6 +50,7 @@
 <script setup>
 import { TimeUtils } from '@lib/utils/timeUtils';
 import { computed, onMounted, ref } from 'vue';
+import { storage } from '@lib/utils/utils';
 
 const props = defineProps({
   course: Object,
@@ -76,6 +77,7 @@ const courseProgress = computed(() => {
 
   const completedContent = courseProgress.completedContent || {};
   const totalTopics = Object.values(completedContent).reduce((total, topics) => total + topics.length, 0);
+  if (totalTopics === 0) return 0;
   const completedTopics = Object.values(completedContent).reduce((total, topics) => 
     total + topics.filter(topic => topic.completed).length, 0);
 
@@ -86,7 +88,7 @@ const totalDuration = computed(() => TimeUtils.formatDuration(TimeUtils.calculat
 
 const handleImageError = () => { courseImagePath.value = DEFAULT_IMAGE_URL; };
 const fetchProgress = async () => {
-  progress.value = (await window.store.get("progress")) || {};
+  progress.value = (await storage.get("progress")) || {};
 };
 
 onMounted(() => {

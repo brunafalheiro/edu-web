@@ -22,6 +22,7 @@
 <script setup>
   import { TimeUtils } from "@lib/utils/timeUtils";
   import { ref } from "vue";
+  import { storage } from '@lib/utils/utils';
 
   defineProps({
     completedCourses: Number,
@@ -29,7 +30,7 @@
   });
 
   const getProgress = async () => {
-    const progress = (await window.store.get("progress")) || {};
+    const progress = (await storage.get("progress")) || {};
     return progress;
   };
 

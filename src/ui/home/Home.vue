@@ -37,6 +37,7 @@
   import CourseStats from "./CourseStats.vue";
   import CourseFilters from "./CourseFilters.vue";
   import ToolsSection from "./ToolsSection.vue";
+  import { storage } from '@lib/utils/utils';
 
   const FILTERS = [
     { label: 'Todos os cursos', value: 'all' },
@@ -80,7 +81,7 @@
   const redirectTo = (path) => router.push(`/${path}`);
 
   const loadCoursesData = async () => {
-    const progress = (await window.store.get("progress")) ?? {};
+    const progress = (await storage.get("progress")) ?? {};
     const courseProgress = Object.entries(progress);
 
     const stats = courseProgress.reduce((acc, [_, data]) => {
