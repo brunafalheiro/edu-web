@@ -1,0 +1,88 @@
+@use '../../../index.scss' as *;
+
+.tree {
+  li {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 51.8%;
+      height: 10px;
+      border-top: 1px solid hsl(var(--muted-foreground));
+    }
+
+    &::before { right: 49.4%; }
+
+    &::after {
+      left: 50%;
+      border-left: 1px solid hsl(var(--muted-foreground));
+    }
+
+    &:only-child {
+      padding-top: 0;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    &:first-child::before { border: none; }
+
+    &:first-child::after { border-radius: 5px 0 0 0; }
+
+    &:last-child::before {
+      border-right: 1px solid hsl(var(--muted-foreground));
+      border-radius: 0 5px 0 0;
+    }
+
+    &:last-child::after { border: none; }
+
+    a {
+      &.visiting {
+        border: 1px solid hsl(var(--lavender)) !important;
+        background-color: hsl(var(--lavender-ultralight)) !important;
+      }
+
+      &.found {
+        border: 1px solid hsl(var(--green-dark)) !important;
+        background-color: hsl(var(--green) / 0.1) !important;
+
+        &:hover {
+          border: 1px solid hsl(var(--green-dark)) !important;
+          background-color: hsl(var(--green) / 0.25) !important;
+        }
+      }
+
+      &:hover,
+      &:hover + ul li a {
+        background: hsl(var(--accent)) !important;
+        color: hsl(var(--foreground));
+        border: 1px solid hsl(var(--foreground)) !important;
+      }
+
+      &:hover {
+        ul,
+        +ul li {
+          &::before, &::after { border-color: #000000; }
+        }
+
+        +ul::before,
+        +ul ul::before {
+          border-color: #000000;
+        }
+      }
+    }
+
+    ul::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      border-left: 1px solid hsl(var(--muted-foreground));
+      height: 22px;
+      width: 0;
+    }
+  }
+}

@@ -1,0 +1,854 @@
+[
+  {
+    "id": "binaryTree",
+    "name": "Árvores Binárias",
+    "description": "Aprenda sobre árvores binárias, percursos, operações e balanceamento.",
+    "classes": [
+      {
+        "id": "1",
+        "name": "Fundamentos de Árvores",
+        "description": "O que são árvores, para que servem, como são representadas e os principais componentes e propriedades que definem esse tipo de estrutura.",
+        "topics": [
+          {
+            "id": "1",
+            "name": "O que são estruturas de dados hierárquicas",
+            "content": [
+              {
+                "type": "text",
+                "value": "Antes de estudarmos árvores binárias, precisamos compreender um conceito fundamental: estruturas de dados hierárquicas. Elas se diferenciam de estruturas lineares como listas e filas por representarem relações de \"pai e filho\" entre os elementos."
+              },
+              {
+                "type": "text",
+                "value": "Uma estrutura de dados hierárquica é uma forma de organizar os dados em níveis, de modo que alguns elementos são \"superiores\" ou \"mais gerais\" do que outros. Isso é diferente das estruturas lineares, onde os elementos estão organizados em sequência (como uma fila ou lista encadeada). Dessa forma, uma hierarquia pode ser representada por uma coleção de nós conectados por ligações direcionais, onde um nó pode ter vários filhos, mas apenas um pai, formando uma estrutura em forma de árvore invertida."
+              },
+              {
+                "type": "text",
+                "value": "Pense em uma lista de tarefas como uma estrutura linear: cada tarefa vem depois da anterior."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_1_1.png"
+              },
+              {
+                "type": "text",
+                "value": "Agora pense em uma organização de empresa: um diretor pode ter vários gerentes abaixo dele, e cada gerente tem sua própria equipe. Isso é uma estrutura hierárquica."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_1_2.png"
+              },
+              {
+                "type": "text",
+                "value": "Utilizar esse tipo de estrutura é ideal quando os dados têm relações de dependência ou inclusão, como:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Representar sistemas de arquivos,</li><li>Modelar expressões matemáticas compostas,</li><li>Criar árvores de decisão para jogos ou IA,</li><li>Construir índices de busca em banco de dados.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "No próximo tópico, vamos aprender o que é uma árvore, uma das formas mais comuns e poderosas de estrutura de dados hierárquica. como ela se organiza e por que ela é tão importante no mundo da computação."
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "name": "Definição de árvore",
+            "content": [
+              {
+                "type": "text",
+                "value": "Agora que você entende o que são estruturas hierárquicas, vamos estudar um dos modelos mais clássicos e úteis desse tipo de estrutura: a árvore. Presente em inúmeras aplicações na computação, a árvore é uma estrutura fundamental para organizar, pesquisar e manipular dados."
+              },
+              {
+                "type": "text",
+                "value": "<b>Definição de árvore:</b>"
+              },
+              {
+                "type": "text",
+                "value": "Uma árvore é uma estrutura de dados não linear, composta por arestas que seguem uma organização hierárquica.  Formalmente, definimos uma árvore T como um conjunto finito de zero ou mais nós tal que:"
+              },
+              {
+                "type": "text",
+                "value": "Se o número de nós for igual a zero, temos uma árvore vazia, ou <br> Se o número de nós for maior que 0"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>existe um nó especialmente denominado raiz de T</li><li>os nós restantes formam m ≥ 0 conjuntos disjuntos p1, p2 … pm, cada um desses conjuntos é uma árvore em si, chamada subárvore da raiz de T, ou simplesmente subárvore.</li></ul>"
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "name": "Representação gráfica de uma árvore",
+            "content": [
+              {
+                "type": "text",
+                "value": "Há várias formas de representar árvores em estruturas de dados, e a escolha ideal depende do tipo de árvore e das operações que se deseja realizar.  Neste tópico, vamos conhecer algumas das formas mais comuns dessas representações, com base em diagramas e técnicas utilizadas na literatura clássica da computação."
+              },
+              {
+                "type": "text",
+                "value": "<b>Hierárquica:</b>"
+              },
+              {
+                "type": "text",
+                "value": "É a forma mais comum de representar uma árvore, inspirada na aparência natural das árvores invertidas, onde a raíz fica no topo e os filhos são desenhados abaixo do pai, de forma ramificada."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_3_1.png"
+              },
+              {
+                "type": "text",
+                "value": "<b>Diagrama de Venn:</b>"
+              },
+              {
+                "type": "text",
+                "value": "Um círculo representa cada nodo e seus nodos descendentes são inseridos dentro do círculo de seus pais."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_3_2.png"
+              },
+              {
+                "type": "text",
+                "value": "<b>Diagrama de Barras:</b>"
+              },
+              {
+                "type": "text",
+                "value": "Linhas são usadas para mostrar a hierarquia dos nós. A raiz possui a linha de maior tamanho e os nós irmãos possuem linhas de tamanhos iguais. Esse método é bastante utilizado na criação de índices de livros  e sua indentação é similar a usada em linguagens de programação."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_3_3.png"
+              },
+              {
+                "type": "text",
+                "value": "<b>Numeração pos níveis:</b>"
+              },
+              {
+                "type": "text",
+                "value": "O nó raiz recebe o número um e todos os nodos seguintes recebem uma numeração sequencial, sempre antecedidos pela numeração de seus nó pai. É uma representação fácil para identificar a profundidade de cada nó."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_3_4.png"
+              },
+              {
+                "type": "text",
+                "value": "<b>Representação por Aninhamento:</b>"
+              },
+              {
+                "type": "text",
+                "value": "Essa representação conts com sucessão de parênteses reproduz as relações entre os nós, aninhando um nó filho ao seu pai."
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_1_3_5.png"
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "name": "Componentes e Propriedades de Árvores",
+            "content": [
+              {
+                "type": "text",
+                "value": "<strong>Nó:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "O nó é a unidade básica de uma árvore. Ele pode armazenar informações (como números, letras, dados de um registro etc.) e pode se conectar a outros nós por meio de arestas. Um nó pode ter:<ul><li>Nenhum filho (nesse caso, é chamado de folha);</li><li>Um ou mais filhos (dependendo do tipo de árvore).</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Aresta:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A aresta é a ligação entre dois nós, indicando uma relação de pai e filho. Elas são direcionais: vão do pai para o filho."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Raiz:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A raiz é o primeiro nó da árvore, o ponto de partida da hierarquia. É o único nó que não possui pai. A raiz é o nó que está no nível mais alto da estrutura, e a partir dela todos os outros nós podem ser alcançados."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Nó pai e nó filho:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Quando um nó está diretamente acima de outro na hierarquia, ele é chamado de pai, e o nó abaixo é seu filho. Cada nó (com exceção da raiz) possui exatamente um pai, mas pode ter vários filhos."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Folha:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Um nó folha é um nó que não possui filhos, pois está no \"fim\" da estrutura."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Irmãos:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Nós irmãos são aqueles que compartilham o mesmo pai. Eles estão no mesmo nível hierárquico, lado a lado na estrutura."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Grau:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "O grau de um nó é definido como o número de filhos diretos que ele possui. Já o grau da árvore é o maior grau encontrado entre todos os seus nós."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Profundidade:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A profundidade de um nó é a distância (em número de arestas) entre ele e a raiz. A raiz tem profundidade 0, seus filhos têm profundidade 1, e assim por diante."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Altura:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A altura de um nó é a maior distância entre ele e uma folha abaixo. A altura da árvore é a altura de sua raiz, ou seja, o número máximo de níveis que ela possui."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Árvore balanceada:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Uma árvore se configura balanceada quando a altura das subárvores de qualquer nó não difere em mais do que uma unidade (ou está dentro de um limite definido), garantindo que a árvore permaneça aproximadamente equilibrada."
+              }
+            ]     
+          }
+        ]
+      }, {
+        "id": "2",
+        "name": "Árvores Binárias",
+        "description": "Apresentação das árvores binárias e as operações fundamentais realizadas nesse tipo de estrutura, como inserção, busca e remoção.",
+        "topics": [
+          {
+            "id": "1",
+            "name": "Definição de Árvore Binária",
+            "content": [{
+              "type": "text",
+              "value": "Agora que você já entende o que é uma árvore, é hora de conhecer uma de suas variações mais importantes e amplamente utilizadas na computação: a árvore binária. Uma árvore binária é uma estrutura de dados hierárquica na qual cada nó pode ter no máximo dois filhos. Esses filhos são nomeados com base em sua posição:  esquerdo e direito."
+            },
+            {
+              "type": "text",
+              "value": "A definição estrutural de uma árvore binária pode ser expressa através da seguinte forma recursiva:"
+            },
+            {
+              "type": "text",
+              "value": "<ul><li>Uma árvore vazia (sem nós)</li><li>Ou composta por um nó raiz, que armazena um valor e aponta para duas outras árvores binárias (sua subárvore esquerda e sua subárvore direita).</li></ul>"
+            },
+            {
+              "type": "text",
+              "value": "Essa característica recursiva torna naturais as implementações de operações como inserção, busca, remoção e percursos, muitas vezes utilizando chamadas recursivas para navegar pelas subestruturas da árvore."
+            },
+            {
+              "type": "text",
+              "value": "Do ponto de vista da teoria dos grafos, a árvore binária é definida como um grafo acíclico, conexo e dirigido, onde cada nó possui grau máximo igual a 2. Isso significa que só pode haver um caminho único entre quaisquer dois nós distintos, e os ramos da árvore (arestas) são direcionados do nó pai para seus filhos. Cada ramo é representado por uma ligação direcionada e sem peso, reforçando a estrutura hierárquica da árvore."
+            },
+            {
+              "type": "text",
+              "value": "No próximo tópico, vamos explorar em mais detalhes os termos fundamentais que descrevem uma árvore binária: raiz, filhos, folhas, altura, profundidade e grau."
+            }
+          ]
+          }, {
+            "id": "2",
+            "name": "Árvore Binária de Busca (BST)",
+            "content": [
+              {
+                "type": "text",
+                "value": "<strong>Árvore Binária de Busca:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Uma das estruturas mais importantes e amplamente utilizadas na computação é a <strong>Árvore Binária de Busca</strong>, também conhecida pela sigla <strong>BST</strong> (<em>Binary Search Tree</em>). Essa estrutura segue uma regra fundamental de ordenação: para cada nó N, todos os valores na subárvore esquerda de N são menores do que o valor armazenado em N, e todos os valores na subárvore direita de N são maiores."
+              },
+              {
+                "type": "text",
+                "value": "Essa regra é o que permite que a BST seja eficiente em operações de busca, inserção e remoção. Ao procurar um valor, por exemplo, podemos compará-lo com o valor do nó atual e decidir rapidamente se devemos ir para a subárvore esquerda (valores menores) ou direita (valores maiores), descartando metade dos dados a cada passo, de maneira semelhante à busca binária em vetores ordenados."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Exemplo:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Visualize a seguinte árvore binária de busca:"
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_2_2_1.png"
+              },
+              {
+                "type": "text",
+                "value": "Observe que:<ul><li>Todos os valores à esquerda de 8 são menores que 8;</li><li>Todos os valores à direita de 8 são maiores que 8;</li><li>Isso vale recursivamente para todos os nós da árvore.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "A eficiência da BST depende do seu balanceamento. Em casos ótimos, quando a árvore está balanceada, uma busca por um nó ocorre em tempo O(log n). Já nos piores casos, quando a árvore se torna muito inclinada, a complexidade das operações pode ser O(n)."
+              },
+              {
+                "type": "text",
+                "value": "No próximo tópico, exploraremos essas operações de busca, inserção e remoção em Árvores Binárias de Busca de forma mais aprofundada."
+              }
+            ]
+          }, {
+            "id": "3",
+            "name": "Operações em BSTs",
+            "content": [
+              {
+                "type": "text",
+                "value": "Para cada uma das operações abaixo, vamos utilizar a estrutura base da árvore em Java:"
+              },
+              {
+                "type": "text",
+                "value": "<code>class Node {\n    int valor;\n    Node esquerdo, direito;\n\n    Node(int valor) {\n        this.valor = valor;\n        this.esquerdo = null;\n        this.direito = null;\n    }\n}</code>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Busca:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A operação de busca tem como objetivo localizar um determinado valor na árvore, comparando o valor procurado com o conteúdo do nó atual e decidindo se deve continuar pela subárvore à esquerda (caso o valor buscado seja menor) ou pela direita (caso seja maior), de forma recursiva."
+              },
+              {
+                "type": "text",
+                "value": "<code>public Node buscar(Node raiz, int valor) {\n    if (raiz == null || raiz.valor == valor)\n        return raiz;\n\n    if (chave < raiz.valor)\n        return buscar(raiz.esquerdo, valor);\n    else\n        return buscar(raiz.direito, valor);\n}</code>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Inserção:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A operação de inserção consiste em adicionar um novo nó respeitando a propriedade de ordenação da árvore. O algoritmo é semelhante ao da busca: percorre-se a árvore até encontrar um local nulo onde o novo valor possa ser inserido. Na regra geral das BSTs, valores repetidos não devem ser inseridos."
+              },
+              {
+                "type": "text",
+                "value": "<code>public Node inserir(Node raiz, int valor) {\n    if (raiz == null) {\n        return new Node(valor);\n    }\n\n    if (chave < raiz.valor)\n        raiz.esquerdo = inserir(raiz.esquerdo, valor);\n    else if (chave > raiz.valor)\n        raiz.direito = inserir(raiz.direito, valor);\n\n    return raiz;\n}</code>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Remoção:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "A remoção é a operação mais complexa em uma BST, pois exige que a propriedade da árvore seja mantida após a exclusão de um nó. Existem três casos a considerar:<ul><li><strong>Caso 1 – Nó folha:</strong> Se o nó a ser removido não tem filhos, basta eliminá-lo.</li><li><strong>Caso 2 – Nó com um filho:</strong> O filho substitui diretamente o nó removido, conectando-se ao seu pai.</li><li><strong>Caso 3 – Nó com dois filhos:</strong> Substitui-se o nó pelo seu sucessor (menor elemento da subárvore direita) ou antecessor (maior elemento da subárvore esquerda). Após a substituição, remove-se o nó duplicado que foi copiado.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "<code>public Node remover(Node raiz, int valor) {\n    if (raiz == null)\n        return null;\n\n    if (valor < raiz.valor) {\n        raiz.esquerdo = remover(raiz.esquerdo, valor);\n    } else if (chave > raiz.valor) {\n        raiz.direito = remover(raiz.direito, valor);\n    } else {\n        // Caso 1: Sem filhos\n        if (raiz.esquerdo == null && raiz.direito == null)\n            return null;\n\n        // Caso 2: Um filho\n        if (raiz.esquerdo == null)\n            return raiz.direito;\n        if (raiz.direito == null)\n            return raiz.esquerdo;\n\n        // Caso 3: Dois filhos\n        Node sucessor = encontrarMinimo(raiz.direito);\n        raiz.valor = sucessor.valor;\n        raiz.direito = remover(raiz.direito, sucessor.valor);\n    }\n\n    return raiz;\n}\n\nprivate Node encontrarMinimo(Node node) {\n    while (node.esquerdo != null)\n        node = node.esquerdo;\n    return node;\n}</code>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Complexidade das Operações:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "De maneira geral, a complexidade das operações é proporcional à altura da árvore:<ul><li><strong>Melhor caso (árvore balanceada):</strong> O(log n)</li><li><strong>Pior caso:</strong> O(n)</li></ul>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Percursos em Árvores Binárias",
+        "description": "Como percorrer uma árvore binária de diferentes maneiras para acessar ou processar seus dados. Ensinamento dos principais tipos de percursos: pré-ordem, em ordem, pós-ordem e por nível",
+        "topics": [
+          {
+            "id": "1",
+            "name": "Introdução aos Percursos em Árvores Binárias",
+            "content": [
+              {
+                "type": "text",
+                "value": "Imagine que você recebeu a missão de organizar a árvore genealógica de uma família. No topo dessa estrutura está o bisavô, ele é o início de tudo, a raiz da árvore. A partir dele, descendem filhos, netos e bisnetos, cada um ocupando sua posição em uma hierarquia familiar. Essa árvore é representada de forma visual, com cada pessoa ocupando um nó, e cada ligação entre pai e filho representada por uma aresta. Como em uma árvore binária, cada pessoa pode ter até dois filhos."
+              },
+              {
+                "type": "text",
+                "value": "Agora, imagine que você precisa listar o nome de todos os membros da família. A pergunta que surge é: <em>Qual a melhor forma de visitar todas as pessoas dessa árvore, sem esquecer ninguém e seguindo uma ordem lógica?</em>"
+              },
+
+              {
+                "type": "text",
+                "value": "Você pode começar pelo bisavô e visitar seus descendentes diretos primeiro... ou talvez prefira visitar os membros mais à esquerda da árvore antes dos outros... ou ainda, deixar para visitar cada pai apenas depois de visitar todos os seus filhos."
+              },
+              {
+                "type": "text",
+                "value": "Perceba que existem várias formas de percorrer essa estrutura, e cada uma dessas formas pode servir a um objetivo diferente: entender a ordem de nascimento, agrupar gerações, ou até calcular a profundidade da árvore genealógica. Essa situação nos leva a um conceito fundamental no estudo de árvores binárias: os percursos. Eles são estratégias que definem a ordem em que os nós da árvore serão visitados. Em outras palavras, são caminhos que seguimos para garantir que todos os elementos sejam explorados corretamente, de acordo com o propósito da operação."
+              },
+              {
+                "type": "text",
+                "value": "Existem diversos tipos de percurso, e cada um deles serve a propósitos diferentes. As três formas mais clássicas, e que veremos em detalhes mais adiante, são chamadas de <strong>pré-ordem (pre-order)</strong>, <strong>em ordem (in-order)</strong> e <strong>pós-ordem (post-order)</strong>. Elas são baseadas em uma abordagem recursiva, onde a visita a um nó é feita em um ponto diferente em relação às visitas aos seus filhos. Além delas, há também o <strong>percurso por nível (level-order)</strong>, que segue uma lógica mais próxima de uma fila."
+              },
+              {
+                "type": "text",
+                "value": "Nos próximos tópicos, veremos cada tipo de percurso em detalhe e aprender como e quando aplicar cada um."
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "name": "Percurso Pré-Ordem (Pre-Order)",
+            "content": [
+              {
+                "type": "text",
+                "value": "Dentre os percursos mais utilizados, o <strong>percurso pré-ordem (pre-order)</strong> é um dos mais intuitivos e serve como base para várias aplicações práticas, como a cópia de uma árvore ou a geração de expressões prefixadas."
+              },
+              {
+                "type": "text",
+                "value": "O percurso em pré-ordem segue a seguinte lógica:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Visita o nó atual (raiz).</li><li>Percorre recursivamente a subárvore esquerda.</li><li>Percorre recursivamente a subárvore direita.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "Ou seja, visitamos o nó antes de seus filhos, por isso o nome “pré”-ordem. Essa estratégia é útil, por exemplo, quando queremos salvar a estrutura de uma árvore para reconstruí-la mais tarde, pois a raiz de cada subárvore é processada antes de seus descendentes."
+              },
+              {
+                "type": "text",
+                "value": "Vamos ilustrar com um exemplo simples:"
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_3_2_1.png"
+              },
+              {
+                "type": "text",
+                "value": "Aplicando o percurso pré-ordem nessa árvore, temos a seguinte sequência de visita:"
+              },
+              {
+                "type": "text",
+                "value": "<strong>A → B → D → E → C → F</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Observe que o nó raiz A é visitado primeiro, depois percorremos completamente a subárvore da esquerda (B, D, E), e por fim, a subárvore da direita (C, F)."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Pseudocódigo do percurso pré-ordem:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "<code>função preOrdem(nó):<br>&nbsp;&nbsp;&nbsp;&nbsp;se nó != nulo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visitar(nó.valor)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preOrdem(nó.esquerda)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preOrdem(nó.direita)</code>"
+              },
+              {
+                "type": "text",
+                "value": "Nesse código, a função visitar() representa qualquer ação que você deseje executar no momento da visita ao nó, como imprimir o valor, calcular uma soma, etc."
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "name": "Percurso Em Ordem (In-Order)",
+            "content": [
+              {
+                "type": "text",
+                "value": "O percurso em ordem, também conhecido pelo termo em inglês <em>in-order traversal</em>, é uma das formas mais importantes de percorrer uma árvore binária, especialmente quando estamos trabalhando com árvores binárias de busca (BSTs). Isso porque, ao aplicarmos esse percurso em uma BST, obtemos os elementos em ordem crescente, o que é extremamente útil para visualização ordenada dos dados."
+              },
+              {
+                "type": "text",
+                "value": "De forma geral, o percurso em ordem segue a seguinte sequência recursiva:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Visitar a subárvore esquerda;</li><li>Visitar onó atual;</li><li>Visitar a subárvore direita.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "Essa abordagem é natural se pensarmos que queremos processar os menores valores (à esquerda), depois o valor central, e por fim os maiores (à direita)."
+              },
+              {
+                "type": "text",
+                "value": "Considere a seguinte árvore binária de busca:"
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_3_3_1.png"
+              },
+              {
+                "type": "text",
+                "value": "Se aplicarmos o percurso em ordem, os nós serão visitados na seguinte sequência:"
+              },
+              {
+                "type": "text",
+                "value": "<strong>10 → 20 → 30 → 40 → 50 → 60 → 70</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Observe que o resultado é uma lista de valores ordenados crescentemente, graças à estrutura da árvore binária de busca e à lógica do <em>in-order traversal</em>."
+              },
+              {
+                "type": "text",
+                "value": "<strong>Pseudocódigo para percurso em ordem:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "<code>função emOrdem(nó):<br>&nbsp;&nbsp;&nbsp;&nbsp;se nó ≠ nulo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emOrdem(nó.esquerda)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visitar(nó.valor)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emOrdem(nó.direita)</code>"
+              },
+              {
+                "type": "text",
+                "value": "A função visitar() representa qualquer operação que se deseja realizar com o valor do nó."
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "name": "Percurso Pós-Ordem (Post-Order)",
+            "content": [
+              {
+                "type": "text",
+                "value": "O percurso em pós-ordem é um dos três percursos profundos clássicos utilizados em árvores binárias, ao lado do pré-ordem e em ordem. Ele é especialmente útil em situações em que desejamos processar todos os descendentes de um nó antes de processar o próprio nó. Isso é particularmente importante em algoritmos de remoção de nós, liberação de memória ou avaliação de expressões."
+              },
+              {
+                "type": "text",
+                "value": "A ordem de visitação dos nós no pós-ordem é a seguinte:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Visita à subárvore esquerda;</li><li>Visita à subárvore direita;</li><li>Visita ao nó atual (raiz).</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "Essa ordem contrasta com o pré-ordem (onde o nó atual é visitado primeiro) e o em ordem (onde o nó é visitado entre as subárvores). Em termos simples, no pós-ordem o nó “espera” todos os seus filhos serem visitados antes de ser processado."
+              },
+              {
+                "type": "text",
+                "value": "Considere a seguinte árvore binária:"
+              },
+              {
+                "type": "image",
+                "value": "courses/binaryTree_3_2_1.png"
+              },
+              {
+                "type": "text",
+                "value": "Aplicando o percurso pós-ordem, a ordem de visita será:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Subárvore esquerda de A → B<ul><li>Subárvore esquerda de B → D → (visita D)</li><li>Subárvore direita de B → E → (visita E)</li><li>Visita B</li></ul></li><li>Subárvore direita de A → C<ul><li>Subárvore direita de C → F → (visita F)</li><li>Visita C</li></ul></li><li>Visita A</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "Resultado do percurso pós-ordem: <strong>D, E, B, F, C, A</strong>."
+              },
+              {
+                "type": "text",
+                "value": "Observe como todos os filhos de um nó são visitados antes dele mesmo, o que faz sentido em contextos como eliminação de nós em ordem segura."
+              },
+              {
+                "type": "text",
+                "value": "Pseudocódigo do percurso pós-ordem:"
+              },
+              {
+                "type": "text",
+                "value": "<code>função posOrdem(nó):<br>&nbsp;&nbsp;&nbsp;&nbsp;se nó ≠ nulo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;posOrdem(nó.esquerda)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;posOrdem(nó.direita)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visitar(nó.valor)</code>"
+              }
+            ]
+          },
+          {
+            "id": "5",
+            "name": "Nível (Level-Order)",
+            "content": [
+              {
+                "type": "text",
+                "value": "O percurso em nível, também conhecido como level-order traversal, é uma forma de visitar todos os nós de uma árvore binária seguindo a ordem dos seus níveis, de cima para baixo e da esquerda para a direita. Diferentemente dos percursos em profundidade (pré-ordem, in-ordem e pós-ordem), que utilizam uma abordagem recursiva e visitam os ramos da árvore até o fundo antes de retornar, o percurso em nível percorre a árvore de forma mais ampla, camada por camada. Imagine a árvore como um conjunto de andares em um prédio. No percurso em nível, você visita todos os apartamentos do primeiro andar (nível 0), depois do segundo (nível 1), e assim por diante."
+              },
+              {
+                "type": "text",
+                "value": "Para realizar esse percurso, utilizamos uma estrutura auxiliar do tipo fila da seguinte forma:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Inicializamos a fila com o nó raiz.</li><li>Enquanto a fila não estiver vazia:</li><ul><li>Removemos o primeiro nó da fila e processamos seu valor.</li><li>Em seguida, inserimos na fila seus filhos (primeiro o da esquerda, depois o da direita), se existirem.</li></ul></ul>"
+              },
+              {
+                "type": "text",
+                "value": "Por exemplo, considere a seguinte árvore."
+              },
+              {
+                "type":"image",
+                "value": "courses/binaryTree_3_2_1.png"
+              },
+              {
+                "type": "text",
+                "value": "O percurso em nível desta árvore resultaria na sequência: <strong>A, B, C, D, E, F</strong>."
+              },
+              {
+                "type": "text",
+                "value": "<ul><li>Começamos com A na fila → processamos A, enfileiramos B e C.</li> <li>Processamos B, enfileiramos D e E.</li> <li>Processamos C, enfileiramos F.</li><li>Em seguida, processamos D, E e F.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Pseudocódigo do percurso em nível:</strong>"
+              },
+              {
+                "type": "text",
+                "value": "<code>função percursoEmNivel(raiz):<br>&nbsp;&nbsp;&nbsp;&nbsp;se raiz == nulo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retorne<br>&nbsp;&nbsp;&nbsp;&nbsp;criar fila vazia<br>&nbsp;&nbsp;&nbsp;&nbsp;enfileirar(raiz)<br>&nbsp;&nbsp;&nbsp;&nbsp;enquanto fila não estiver vazia:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no = desenfileirar()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processar(no.valor)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se no.esquerda != nulo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enfileirar(no.esquerda)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;se no.direita != nulo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enfileirar(no.direita)</code>"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hashTable",
+    "name": "Tabelas Hash",
+    "description": "Aprenda sobre tabelas hash.",
+    "classes": [
+      {
+        "id": "1",
+        "name": "Introdução à Tabelas Hash",
+        "description": "Entenda o conceito de tabelas hash, sua estrutura e aplicações.",
+        "topics": [
+          {
+            "id": "1",
+            "name": "O que são tabelas hash",
+            "content": [
+              {
+                "type": "text",
+                "value": "Imagine que você tenha uma grande coleção de informações, como uma lista de nomes de pessoas ou produtos, e precise encontrar um item específico rapidamente. Procurar esse dado diretamente em uma lista pode ser lento, pois pode ser necessário percorrer muitos elementos até encontrar o desejado."
+              },
+              { "type": "text", "value": "Nesse contexto, surgem as tabelas hash: uma estrutura de dados que permite acessar valores de forma muito rápida, e, as vezes, quase instantânea. A ideia fundamental por trás da tabela hash é a utilização de uma função hash, um método que transforma a chave de um dado (por exemplo, um nome, um número ou qualquer identificador) em um número inteiro, chamado de índice. Esse índice corresponde a uma posição específica em um array, onde o dado será armazenado." },
+              {
+                "type": "image",
+                "value": "courses/hashTable_1_1_1.png"
+              },
+              { "type": "text", "value": "Dessa forma, para inserir, buscar ou remover um elemento na tabela, basta aplicar a função hash à chave e acessar diretamente a posição indicada no array, evitando buscas sequenciais demoradas." }
+            ]
+          },
+          {
+            "id": "2",
+            "name": "Onde aplicar",
+            "content": [
+              {
+                "type": "text",
+                "value": "As tabelas hash estão presentes em muitas soluções computacionais modernas devido à sua principal vantagem: a velocidade de acesso em tempo constante, ou seja, com complexidade O(1) na média dos casos. Isso significa que, independentemente da quantidade de dados armazenados, a busca por um item geralmente leva o mesmo tempo,  algo extremamente valioso em sistemas que lidam com grandes volumes de informação ou que exigem respostas rápidas."
+              },
+              {
+                "type": "text",
+                "value": "Imagine que você precisa encontrar um nome específico em uma lista com milhares de registros. Em estruturas como listas ou vetores, seria necessário percorrer os elementos um a um até encontrar o desejado. Já com uma tabela hash, o acesso acontece quase como um “salto” direto ao local onde a informação está, sem precisar procurar. Essa propriedade transforma a tabela hash em uma ferramenta extremamente eficiente para inúmeras aplicações práticas."
+              },
+              {
+                "type": "text",
+                "value": "Essa característica faz das tabelas hash ferramentas ideais para uma variedade de aplicações onde a velocidade de acesso é crítica. Por exemplo:"
+              },
+              {
+                "type": "text",
+                "value": "<ul><li><strong>Sistemas de autenticação:</strong> ao fazer login, o sistema precisa verificar se o nome de usuário e a senha estão corretos. Com tabelas hash, essa verificação acontece de forma muito rápida, mesmo com milhões de registros.</li><li><strong>Compiladores e interpretadores:</strong> identificadores de variáveis, funções e escopos são armazenados em tabelas hash, permitindo acesso imediato durante a análise de código.</li><li><strong>Sistemas de cache:</strong> ao acessar uma página da web, por exemplo, os dados recentes podem ser armazenados em uma tabela hash para que acessos repetidos aconteçam com rapidez.</li><li><strong>Mapas e dicionários em linguagens de programação:</strong> estruturas como dict em Python, HashMap em Java ou objetos em JavaScript são exemplos diretos de tabelas hash.</li><li><strong>Indexação em bancos de dados:</strong> especialmente em campos não ordenados, tabelas hash ajudam a localizar registros com altíssima velocidade.</li></ul>"
+              },
+              {
+                "type": "text",
+                "value": "Naturalmente, seu bom desempenho depende de um projeto adequado, especialmente na forma como são tratadas colisões de chaves, mas esses aspectos serão abordados nos próximos tópicos do curso."
+              }
+            ]
+          }
+          
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Funções Hash",
+        "description": "Aprenda sobre as funções hash mais utilizadas e quais escolher.",
+        "topics": [
+          {
+            "id": "1",
+            "name": "Função hash ideal",
+            "content": [
+              { "type": "text", "value": "Sabemos que uma função hash consegue tornar o acesso a dados de forma quase instantânea. Porém, nem toda função de hashing é boa. Uma boa função hash precisa ser simples de calcular, gerar poucos conflitos (ou colisões) e espalhar os dados de maneira equilibrada pela tabela. Pense em uma festa onde você deve distribuir convidados em mesas. Se todos forem parar na mesma mesa (colisão), o evento vira um caos. Se cada mesa tiver um número parecido de pessoas, a festa flui melhor. O mesmo vale para a tabela hash: quanto mais equilibrada a distribuição, melhor o desempenho. " },
+              { "type": "text", "value": "O tamanho da tabela funciona como as mesa, que possui um número ideal:" },
+              { "type": "text", "value": "<ul><li><strong>Tabela com tamanho primo:</strong> Tabelas nesse tamanho reduzem a probabilidade de colisões, mesmo que a função de hashing utilizada não seja muito eficaz</li> <li><strong>Tabela com tamanho de potência de dois:</strong> Tabelas com esse tamanho melhoram a velocidade, mas pode aumentar os problemas de colisão se estiver utilizando uma função de hashing mais simples.</li></ul>" },
+              { "type": "text", "value": "<strong>Função hash ideal:</strong> Para um bom funcionamento, uma função hash deve satisfazer as seguintes condições:" },
+              { "type": "text", "value": "<ul><li>Ser simples e barata de se calcular;</li><li>Garantir que valores diferentes produzam posições diferentes;</li><li>Gerar uma distribuição equilibrada dos dados na tabela. Cada posição da tabela tem a mesma chance de receber uma chave (máximo espalhamento);</li></ul>" },
+              { "type": "text", "value": "Nos próximos capítulos, trataremos das funções de hashing comumente utilizadas." }
+            ]
+          },
+          {
+            "id": "2",
+            "name": "Método da Divisão",
+            "content": [
+              {
+                "type": "text",
+                "value": "O método da divisão é uma das formas mais conhecidas e utilizadas para criar funções de hashing. Ele é direto, eficiente e fácil de implementar. A ideia é bem simples: você pega a chave (geralmente um número inteiro) e calcula o resto da divisão dessa chave pelo tamanho da tabela hash. Esse resto se torna o índice onde o dado será armazenado."
+              },
+              {
+                "type": "text",
+                "value": "Para entender melhor, pense numa roda-gigante com várias cadeiras numeradas. Quando uma nova pessoa (ou chave) chega, você diz: “Vamos ver qual cadeira ela pega”. Fazemos isso dividindo um número da chave pelo número total de cadeiras e vendo onde “sobra lugar”. O “lugar que sobra” (o resto da divisão) é justamente a cadeira onde a pessoa vai sentar."
+              },
+              {
+                "type": "text",
+                "value": "Esse processo é chamado de operação módulo, e o número pelo qual dividimos, o tamanho da tabela, desempenha um papel muito importante. À primeira vista, pode parecer que qualquer número serviria. Mas aqui está o segredo: escolher um número primo como tamanho da tabela faz toda a diferença."
+              },
+              {
+                "type": "text",
+                "value": "Imagine que temos uma tabela de tamanho 9, e nossas chaves são os números {3, 6, 9, 12, 15, 18, 21}. Todos esses números são múltiplos de 3. Quando usamos o módulo 9, que também é múltiplo de 3, as posições geradas para essas chaves ficam limitadas a poucos índices: 0, 3 e 6. Resultado? Um monte de chaves brigando pelos mesmos poucos lugares, enquanto o resto da tabela fica vazio. É como se várias pessoas recebessem o mesmo número de cadeira e começassem a empilhar umas sobre as outras, deixando outras cadeiras ociosas."
+              },
+              {
+                "type": "image",
+                "value": "courses/hashTable_2_2_1.png"
+              },
+              {
+                "type": "text",
+                "value": "Agora, se em vez de 9, usamos um número primo como 7, a história muda completamente. Como 7 não tem fatores comuns com as chaves, os restos da divisão são mais variados. As chaves se espalham melhor pela tabela, ocupando posições diferentes e reduzindo significativamente as colisões. A roda-gigante gira de forma mais equilibrada, com cada cadeira ocupada de forma mais justa."
+              },
+              {
+                "type": "image",
+                "value": "courses/hashTable_2_2_2.png"
+              },
+              {
+                "type": "text",
+                "value": "Claro, nenhuma função de hash é perfeita para todos os casos. Se todas as chaves fossem múltiplos de 7, o módulo 7 também teria problemas. Mas na prática, especialmente quando lidamos com dados variados, usar um número primo como tamanho da tabela oferece mais segurança contra padrões que causam agrupamentos indesejados."
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "name": "Método da Multiplicação",
+            "content": [
+              { "type": "text", "value": "O método da multiplicação é uma técnica amplamente utilizada para calcular a posição de uma chave em uma tabela hash, especialmente eficaz quando o tamanho da tabela não é um número primo. Nesse método, a chave é inicialmente multiplicada por uma constante A, tal que 0 < A < 1. O objetivo dessa multiplicação é produzir um valor que, ao ser processado, resulte em uma distribuição mais uniforme dos índices dentro da tabela." },
+              { "type": "text", "value": "Após essa multiplicação, o próximo passo é extrair apenas a parte fracionária do produto obtido. Essa fração é então multiplicada por m, que representa o tamanho da tabela hash. O resultado dessa operação é um número real que, ao ser truncado ou convertido para inteiro, indica a posição da chave na tabela." },
+              {
+                "type": "text",
+                "value": "<code>def hash_multiplicacao(k, m, A=0.6180339887):<br>&nbsp;&nbsp;&nbsp;&nbsp;fracao = (k * A) % 1<br>&nbsp;&nbsp;&nbsp;&nbsp;posicao = int(m * fracao)<br>&nbsp;&nbsp;&nbsp;&nbsp;return posicao</code>"
+              },
+              { "type": "text", "value": "Esse método possui uma característica desejável: ele tende a funcionar bem mesmo quando m, o tamanho da tabela, não é um número primo,  o que geralmente causa distribuições desiguais em outros métodos, como o da divisão. O comportamento estável do método da multiplicação nesse contexto se deve à maneira como ele introduz variabilidade nos cálculos, dependendo do valor de A." },
+              { "type": "text", "value": "A escolha do valor de A é importante para o desempenho da função. Valores racionais simples, como 0,5 ou 0,25, devem ser evitados, pois levam a agrupamentos indesejados e má distribuição dos índices. Em vez disso, é recomendável utilizar números irracionais, como a razão áurea (aproximadamente 0,6180339887) ou sua recíproca. Esses valores introduzem mais aleatoriedade e evitam padrões repetitivos, promovendo uma melhor dispersão das chaves pela tabela." }
+            ]
+          },
+          {
+            "id": "4",
+            "name": "Método da Dobra",
+            "content": [
+              { "type": "text", "value": "Vamos imaginar que temos um número grande, como uma sequência de dígitos anotada em um papel. Agora, imagine que esse papel pode ser dobrado ao meio, de forma que os números nas pontas se encontrem, como dobrar uma folha de carta. Esse é o princípio por trás do método da dobra." },
+              { "type": "text", "value": "Ao contrário de outros métodos que usam divisões ou multiplicações com constantes, o método da dobra se baseia em manipulação direta dos dígitos da chave. Funciona assim: dobramos a sequência de dígitos para que partes diferentes dela se sobreponham, e somamos os valores que ficaram em cima uns dos outros. O detalhe curioso é que a soma ignora o “vai um”, ou seja, somamos apenas os dígitos individuais, sem levar em conta se o total daria dois dígitos. É como somar 7 + 8 e guardar apenas o 5, ignorando o fato de que o total seria 15." },
+              { "type": "text", "value": "O processo pode ser repetido várias vezes, dobrando e somando, até que o valor final caiba no intervalo desejado, geralmente entre 0 e o tamanho da tabela hash. Essa repetição serve para garantir que o valor gerado esteja dentro dos limites adequados da estrutura que estamos usando." },
+              {
+                "type": "image",
+                "value": "courses/hashTable_2_4_1.png"
+              },
+              { "type": "text", "value": "O método da dobra também pode ser adaptado para trabalhar com números binários. Nesse caso, a “soma” dos dígitos sobrepostos é feita com uma operação lógica chamada OU exclusivo (XOR), que ajuda a misturar os bits." },
+              { "type": "text", "value": "Esse método é especialmente útil quando lidamos com números grandes, como CPFs, números de telefone ou códigos de produto, pois oferece uma maneira rápida de espalhar esses valores ao longo da tabela." }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Tratamento de Colisões",
+        "description": "Aprenda sobre técnicas de colisão, como endereçamento aberto e encadeamento",
+        "topics": [
+          {
+            "id": "1",
+            "name": "Endereçamento aberto",
+            "content": [
+              { "type": "text", "value": "Durante a utilização de tabelas hash, é comum que diferentes chaves resultem no mesmo valor após a aplicação da função de hashing. Esse fenômeno é chamado de colisão, e ocorre porque o espaço de endereçamento da tabela (ou seja, o número de posições disponíveis) é limitado, enquanto o número de possíveis chaves pode ser muito maior. Assim, duas ou mais chaves distintas podem ser mapeadas para a mesma posição, o que exige estratégias para lidar com esse impasse." },
+              { "type": "text", "value": "Uma das abordagens mais utilizadas para tratar colisões é o endereçamento aberto. Neste método, todos os elementos continuam sendo armazenados dentro da própria tabela hash, e não fora dela. Quando ocorre uma colisão, o algoritmo procura por uma nova posição vaga na própria estrutura de dados. Esse processo de busca por outra posição é chamado de sondagem (ou rehashing), e pode ser implementado de diferentes maneiras." },
+              {
+                "type": "text",
+                "value": "<strong>Sondagem linear</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Quando uma colisão é detectada, o algoritmo verifica sequencialmente as próximas posições da tabela até encontrar uma que esteja livre. A busca continua em incremento de um em um, ou seja, se a posição inicial estiver ocupada, verifica-se a próxima, depois a seguinte, e assim por diante, até encontrar um espaço disponível."
+              },
+              {
+                "type": "text",
+                "value": "No entanto, embora a sondagem quadrática ofereça suas vantagens, se várias chaves tiverem a mesma colisão, pode levar mais tempo para encontrar um bucket vazio, pois sua sequência de sondagem pode não visitar todos os buckets na tabela de hash."
+              },
+              {
+                "type": "text",
+                "value": "Código da sondagem linear:"
+              },
+              {
+                "type": "text",
+                "value": "<code>def hash_sondagem_quadratica(key, k, i):<br>&nbsp;&nbsp;&nbsp;&nbsp;return (key % k + i**2) % k<br></code>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Sondagem quadrática</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Em vez de verificar as posições seguintes de forma sequencial, a sondagem quadrática calcula os próximos índices com base em uma função quadrática. Por exemplo, se a posição original da colisão é i, a próxima tentativa será i + 1², depois i + 2², i + 3² e assim por diante. Isso aumenta a dispersão das chaves pela tabela, reduzindo a formação de agrupamentos consecutivos. No entanto, essa técnica também tem limitações: nem todas as posições da tabela são necessariamente visitadas pela função quadrática, o que pode dificultar a inserção em tabelas com alta taxa de ocupação."
+              },
+              {
+                "type": "text",
+                "value": "Código da sondagem quadrática:"
+              },
+              {
+                "type": "text",
+                "value": "<code>def hash_sondagem_quadratica(key, k, i):<br>&nbsp;&nbsp;&nbsp;&nbsp;return (key % k + i**2) % k<br></code>"
+              },
+              {
+                "type": "text",
+                "value": "<strong>Hashing duplo</strong>"
+              },
+              {
+                "type": "text",
+                "value": "Diferente das sondagens lineares e quadráticas, onde os incrementos aplicados em caso de colisão seguem padrões fixos e previsíveis, o hashing duplo utiliza uma segunda função de hashing para determinar o valor do deslocamento em cada tentativa."
+              },
+              {
+                "type": "text",
+                "value": "No hashing duplo, quando uma colisão ocorre, a posição inicial do elemento é calculada por uma primeira função de hashing, chamada H1. Se essa posição estiver ocupada, aplica-se uma segunda função, H2, sobre a chave, cujo valor é usado como incremento para calcular novas tentativas."
+              },
+              {
+                "type": "text",
+                "value": "A fórmula geral utilizada é:"
+              },
+              {
+                "type": "text",
+                "value": "<code>posição = H1(chave) + i * H2(chave)</code>"
+              },
+              {
+                "type": "text",
+                "value": "onde i é o número da tentativa atual (0, 1, 2, ...). A cada nova colisão, um novo deslocamento é feito com base no valor de H2(chave), resultando em diferentes posições de tentativa. Para garantir que todas as posições da tabela possam ser eventualmente acessadas, é essencial que H2(chave) nunca retorne zero e seja relativamente primo em relação ao tamanho da tabela."
+              },
+              {
+                "type": "text",
+                "value": "A principal vantagem dessa técnica está na sua capacidade de evitar padrões de agrupamento que ocorrem em outras estratégias de sondagem. Com uma boa escolha das funções de hashing, o hashing duplo proporciona uma dispersão mais uniforme das chaves."
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "name": "Encadeamento",
+            "content": [
+              { "type": "text", "value": "Antes de falarmos sobre o encadeamento, precisamos passar por um conceito importante em tabelas hash: fator de carga." },
+              { "type": "text", "value": "<strong>Fator de carga:</strong>" },
+              { "type": "text", "value": "O fator de carga é uma métrica para avaliar a eficiência de uma tabela hash. Ele é definido como a razão entre o número de elementos armazenados e o tamanho total da tabela. Esse valor numérico fornece uma indicação direta de quão cheia está a estrutura. Um fator de carga igual a 0,5, por exemplo, indica que metade da tabela está ocupada. À medida que esse fator se aproxima de 1, a chance de colisões aumenta significativamente, o que pode degradar o desempenho das operações de busca e inserção." },
+              {
+                "type": "image",
+                "value": "courses/hashTable_3_2_1.png"
+              },
+              { "type": "text", "value": "<strong>Encadeamento:</strong>" },
+              { "type": "text", "value": "Nesse método, cada bucket da tabela contém uma lista encadeada onde são armazenados os pares chave-valor que resultam no mesmo índice após a aplicação da função de hashing. Quando uma nova chave gera uma colisão, isto é, quando a posição resultante já está ocupada por outra chave, o novo par chave-valor é simplesmente adicionado à lista encadeada daquele espaço." },
+              { "type": "text", "value": "Com isso, a tabela não precisa se preocupar em encontrar novas posições livres nem recalcular índices alternativos. Ela apenas gerencia listas separadas para cada índice, o que simplifica o processo de inserção, mesmo em cenários de alta taxa de colisão. Porém, há um custo: o tempo de busca, que no melhor caso continua sendo constante, pode se degradar para O(n) no pior cenário." },
+              { "type": "text", "value": "Por isso, a eficiência do encadeamento separado está diretamente relacionada ao tamanho da tabela e ao fator de carga. O ideal, então, é manter esse fator de carga controlado, ampliando a tabela quando necessário ou utilizando uma função de hashing que produza uma distribuição uniforme das chaves." }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
