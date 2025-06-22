@@ -6,7 +6,7 @@
     >
       <i class="pi pi-angle-left text-xl mr-0.5 text-black" />
     </div>
-    <p v-if="text" class="text-2xl font-black mt-1">{{ text }}</p>
+    <p v-if="text" class="text-lg sm:text-2xl font-black mt-1">{{ text }}</p>
   </div>
 </template>
 

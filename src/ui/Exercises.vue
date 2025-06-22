@@ -1,13 +1,45 @@
 <template>
   <div class="w-full flex justify-center">
-    <div class="w-full max-w-6xl p-12 pt-24">
+    <div class="w-full max-w-6xl p-6 sm:p-12 pt-24">
       <div class="flex items-center mb-4">
         <BackButton :backFunction="goBack" :text="`Exercícios ${courseId}`"/>
       </div>
 
-      <div class="w-full flex">
-        <div class="w-fulL border-2 border-black rounded-lg p-6 pt-4 mr-4">
-          <!-- Question rendering with support for text and images -->
+      <div class="w-full flex flex-col md:flex-row">
+        <!-- Exercise menu: on mobile, full width and on top; on desktop, largura fixa 25rem -->
+        <div class="w-full md:w-[25rem] mb-4 md:mb-0 md:h-fit border-2 border-black rounded-lg p-4 px-6 flex flex-wrap gap-4 order-1 md:order-2">
+          <div
+            v-for="index in totalExercises"
+            :key="index"
+            class="bg-white border flex items-center justify-center rounded-lg w-full h-6 max-w-12 cursor-pointer hover:bg-gray-100 transition-all duration-300 relative"
+            :class="{ 
+              'border-lavender bg-lavender/10 scale-105': currentExercise === index,
+              'border-green-500 bg-green-50 hover:bg-green-100': isExerciseCompleted(index) && isExerciseCorrect(index) && currentExercise !== index,
+              'border-red-400 bg-red-50 hover:bg-red-100': isExerciseCompleted(index) && !isExerciseCorrect(index) && currentExercise !== index,
+              'border-black': currentExercise !== index && !isExerciseCompleted(index)
+            }"
+            @click="goToExercise(index)"
+          >
+            <p 
+              class="text-center text-xs font-medium"
+              :class="{ 'font-bold': currentExercise === index }"
+            >{{ index }}</p>
+            <div
+              v-if="isExerciseCompleted(index)"
+              class="absolute -top-2 -right-2 rounded-full p-1 w-5 h-5 flex items-center justify-center border"
+              :class="{
+                'bg-green-500 border-green-500': isExerciseCompleted(index) && isExerciseCorrect(index),
+                'bg-red-400 border-red-400': isExerciseCompleted(index) && !isExerciseCorrect(index)
+              }"
+            >
+              <i
+                class="pi text-[9px] text-white"
+                :class="isExerciseCorrect(index) ? 'pi-check' : 'pi-times'"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div class="w-full border-2 border-black rounded-lg p-6 pt-4 md:mr-4 order-2 md:order-1">
           <div class="mt-2 mb-8">
             <span class="inline-block mb-4 px-2 py-1 text-xs font-semibold bg-lavender-ultralight text-gray-700 rounded">Exercício {{ currentExercise }}</span>
             <div v-if="Array.isArray(currentExerciseData.question)" v-for="(item, index) in currentExerciseData.question" :key="index">
@@ -106,39 +138,6 @@
             <Button v-if="currentExercise < totalExercises" @click="goToExercise(currentExercise + 1)">
               Próximo
             </Button>
-          </div>
-        </div>
-        
-        <div class="w-full max-w-96 h-fit border-2 border-black rounded-lg p-4 px-6 flex flex-wrap gap-4">
-          <div
-            v-for="index in totalExercises"
-            :key="index"
-            class="bg-white border flex items-center justify-center rounded-lg w-full h-6 max-w-12 cursor-pointer hover:bg-gray-100 transition-all duration-300 relative"
-            :class="{ 
-              'border-lavender bg-lavender/10 scale-105': currentExercise === index,
-              'border-green-500 bg-green-50 hover:bg-green-100': isExerciseCompleted(index) && isExerciseCorrect(index) && currentExercise !== index,
-              'border-red-400 bg-red-50 hover:bg-red-100': isExerciseCompleted(index) && !isExerciseCorrect(index) && currentExercise !== index,
-              'border-black': currentExercise !== index && !isExerciseCompleted(index)
-            }"
-            @click="goToExercise(index)"
-          >
-            <p 
-              class="text-center text-xs font-medium"
-              :class="{ 'font-bold': currentExercise === index }"
-            >{{ index }}</p>
-            <div
-              v-if="isExerciseCompleted(index)"
-              class="absolute -top-2 -right-2 rounded-full p-1 w-5 h-5 flex items-center justify-center border"
-              :class="{
-                'bg-green-500 border-green-500': isExerciseCompleted(index) && isExerciseCorrect(index),
-                'bg-red-400 border-red-400': isExerciseCompleted(index) && !isExerciseCorrect(index)
-              }"
-            >
-              <i
-                class="pi text-[9px] text-white"
-                :class="isExerciseCorrect(index) ? 'pi-check' : 'pi-times'"
-              ></i>
-            </div>
           </div>
         </div>
       </div>
@@ -248,3 +247,12 @@
     exerciseProgress.value = progress[courseId] || {};
   });
 </script>
+
+<style scoped>
+@media (max-width: 767px) {
+  /* Remove right margin from question container on mobile */
+  .md\:mr-4 {
+    margin-right: 0 !important;
+  }
+}
+</style>

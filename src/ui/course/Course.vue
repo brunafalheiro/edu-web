@@ -1,12 +1,20 @@
 <template>
-  <div class="w-full flex justify-between">
+  <div class="w-full flex justify-between relative">
+    <button
+      class="md:hidden fixed top-4 right-4 z-50 bg-white border border-gray-300 rounded-sm p-2"
+      @click="isSidebarOpen = true"
+      aria-label="Abrir menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
     <div
-      class="min-h-screen flex flex-col items-center course-content"
-      style="width: calc(100% - 320px)"
+      class="min-h-screen flex flex-col items-center course-content w-full md:w-[calc(100%-320px)]"
     >
       <div
         v-if="!isFinishedCourse"
-        class="w-full max-w-[860px] h-full p-12 pt-24"
+        class="w-full max-w-[860px] h-full p-6 sm:p-12 pt-24"
       >
         <div class="flex items-center mb-2">
           <BackButton :backFunction="goToCourseInfo" :text="currentTopic.name"/>
@@ -95,7 +103,24 @@
         </div>
       </div>
     </div>
-    <Sidebar :classes="classesSkeleton" />
+    <!-- Sidebar desktop -->
+    <Sidebar :classes="classesSkeleton" class="hidden md:block" />
+    <!-- Sidebar mobile (menu sanduíche) -->
+    <transition name="slide-right">
+      <Sidebar
+        v-if="isSidebarOpen"
+        :classes="classesSkeleton"
+        mobile
+        class="fixed top-0 right-0 h-full max-w-xs w-full z-50 bg-white shadow-xl md:hidden"
+        @close="isSidebarOpen = false"
+      />
+    </transition>
+    <!-- Overlay para fechar o menu -->
+    <div
+      v-if="isSidebarOpen"
+      class="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
+      @click="isSidebarOpen = false"
+    ></div>
   </div>
 </template>
 
@@ -129,6 +154,7 @@
   const currentClassName = ref(null);
   const isFinishedCourse = ref(false);
   const isTopicCompleted = ref(false);
+  const isSidebarOpen = ref(false);
 
   const isCourseCompleted = (completedContent) => {
     // Check if all classes exist in completedContent
@@ -334,5 +360,21 @@
   white-space: pre-wrap;
   overflow-x: auto;
   color: #333;
+}
+
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-right-enter-from {
+  transform: translateX(100%);
+}
+.slide-right-enter-to {
+  transform: translateX(0);
+}
+.slide-right-leave-from {
+  transform: translateX(0);
+}
+.slide-right-leave-to {
+  transform: translateX(100%);
 }
 </style>

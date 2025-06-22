@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex justify-center">
-    <div class="w-full max-w-5xl p-12 pt-24">
+    <div class="w-full max-w-5xl p-6 sm:p-12 pt-24">
       <div class="flex items-center mb-4">
         <BackButton :backFunction="goBack" :text="course.name"/>
       </div>

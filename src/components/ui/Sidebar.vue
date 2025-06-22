@@ -1,7 +1,20 @@
 <template>
   <div
-    class="w-full max-w-xs bg-white border-l border-gray-400 fixed right-0 h-screen p-4 pt-24 overflow-y-auto"
+    :class="[
+      'w-full max-w-xs bg-white border-l border-gray-400 fixed right-0 h-screen p-4 pt-24 overflow-y-auto',
+      mobile ? 'z-50' : ''
+    ]"
   >
+    <button
+      v-if="mobile"
+      class="absolute top-4 right-4 z-60 bg-white border border-gray-300 rounded-sm p-2 md:hidden"
+      @click="$emit('close')"
+      aria-label="Fechar menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
     <Accordion type="single" class="w-full" collapsible v-model="activeAccordion">
       <AccordionItem
         v-for="(cls, index) in classes"
@@ -105,7 +118,7 @@ import { useRoute, useRouter } from "vue-router";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { storage } from '@lib/utils/utils';
 
-const props = defineProps({ classes: Array });
+const props = defineProps({ classes: Array, mobile: Boolean });
 
 const progress = ref({});
 const route = useRoute();

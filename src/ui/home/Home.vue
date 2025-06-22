@@ -5,7 +5,7 @@
   />
 
   <div class="w-full flex justify-center">
-    <div class="w-full max-w-6xl p-12 pt-0 mt-12">
+    <div class="w-full max-w-6xl p-6 sm:p-12 pt-0 mt-12">
       <CourseFilters
         :filters="FILTERS"
         :selected-filter="selectedFilter"
