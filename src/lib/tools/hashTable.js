@@ -81,17 +81,19 @@ class HashTableFunctions {
     return true;
   }
 
-  static search(table, value, hashMethod = 'division', collisionMethod = 'open', probingMethod = 'linear') {
-    if (!table || value === null) return false;
+  static search(table, value, hashMethod = 'division', collisionMethod = 'open', probingMethod = 'linear', returnIndex = false) {
+    if (!table || value === null) return returnIndex ? { found: false, index: null } : false;
     
     if (collisionMethod === 'none') {
       const index = this.hash(value, table.length, hashMethod);
-      return table[index] === value;
+      const found = table[index] === value;
+      return returnIndex ? { found, index: found ? index : null } : found;
     }
     
     if (collisionMethod === 'chaining') {
       const index = this.hash(value, table.length, hashMethod);
-      return table[index].includes(value);
+      const found = table[index].includes(value);
+      return returnIndex ? { found, index: found ? index : null } : found;
     }
 
     // Open addressing
@@ -101,8 +103,8 @@ class HashTableFunctions {
     let visited = new Set();
 
     while (!visited.has(index)) {
-      if (table[index] === value) return true;
-      if (table[index] === null) return false;
+      if (table[index] === value) return returnIndex ? { found: true, index } : true;
+      if (table[index] === null) return returnIndex ? { found: false, index: null } : false;
       
       visited.add(index);
       attempt++;
@@ -118,10 +120,10 @@ class HashTableFunctions {
           break;
       }
       
-      if (attempt >= table.length) return false;
+      if (attempt >= table.length) return returnIndex ? { found: false, index: null } : false;
     }
 
-    return false;
+    return returnIndex ? { found: false, index: null } : false;
   }
 
   static clear(table, collisionMethod = 'open') {

@@ -53,9 +53,9 @@
             }">
               <div v-for="(slot, index) in hashTable" :key="index" 
                   class="border border-black rounded-lg p-4 pt-2 pr-2 text-center min-h-[80px] flex flex-col relative"
-                  :class="{ 
+                  :class="{
                     'bg-lavender-50': collisionMethod.startsWith('open') ? slot !== null : (slot && slot.length > 0),
-                    'ring-1 ring-lavender': isSearchedValue && (collisionMethod.startsWith('open') ? slot === valueToSearch : slot.includes(valueToSearch))
+                    'ring-1 ring-lavender': isSearchedValue && searchedIndex === index
                   }">
                 <div class="flex items-center justify-end">
                   <div class="text-xs text-gray-400 mb-2 whitespace-nowrap px-2 border border-gray-400 rounded-lg w-fit h-fit">index {{ index }}</div>
@@ -67,7 +67,7 @@
                   <div v-if="!slot || slot.length === 0">-</div>
                   <div v-else class="flex flex-col gap-1">
                     <div v-for="(value, i) in slot" :key="i" 
-                         :class="{ 'text-lavender-600': isSearchedValue && value === valueToSearch }">
+                         :class="{ 'text-lavender-600': isSearchedValue && searchedIndex === index && value === valueToSearch }">
                       {{ value }}
                     </div>
                   </div>
@@ -235,6 +235,7 @@
   const hashFunction = ref('');
   const collisionMethod = ref('');
   const isSearchedValue = ref(false);
+  const searchedIndex = ref(null);
   const showValidation = ref(false);
 
   const toastStyle = {
@@ -323,14 +324,38 @@
   const searchValue = () => {
     if (!hashTable.value || valueToSearch.value === null) return;
     isSearchedValue.value = true;
-    const found = HashTableFunctions.search(
-      hashTable.value, 
-      valueToSearch.value, 
-      hashFunction.value, 
-      getCollisionType(),
-      getProbingMethod()
-    );
-    
+    let found = false;
+    let index = null;
+    if (getCollisionType() === 'chaining') {
+      for (let i = 0; i < hashTable.value.length; i++) {
+        if (hashTable.value[i] && hashTable.value[i].includes(valueToSearch.value)) {
+          found = true;
+          index = i;
+          break;
+        }
+      }
+    } else {
+      index = HashTableFunctions.hash(
+        valueToSearch.value,
+        hashTable.value.length,
+        hashFunction.value
+      );
+      if (getCollisionType() === 'open') {
+        const probeResult = HashTableFunctions.search(
+          hashTable.value,
+          valueToSearch.value,
+          hashFunction.value,
+          getCollisionType(),
+          getProbingMethod(),
+          true
+        );
+        found = probeResult.found;
+        index = probeResult.index;
+      } else {
+        found = hashTable.value[index] === valueToSearch.value;
+      }
+    }
+    searchedIndex.value = found ? index : null;
     if (!found) {
       toast.error('Valor não encontrado', {
         description: 'O valor buscado não está presente na tabela hash.',
@@ -338,8 +363,7 @@
         toastStyle,
       });
     }
-    
-    setTimeout(() => { isSearchedValue.value = false; }, 1000);
+    setTimeout(() => { isSearchedValue.value = false; searchedIndex.value = null; }, 1000);
     valueToSearch.value = null;
     return found;
   };
@@ -360,4 +384,3 @@
   .bg-lavender-50 { background-color: #f5f3ff; }
   .ring-lavender-300 { --tw-ring-color: #c4b5fd; }
 </style>
-@/tools/hashTable@tools/hashTable
