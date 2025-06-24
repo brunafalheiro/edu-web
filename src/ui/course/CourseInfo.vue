@@ -40,6 +40,10 @@
         </Accordion>
       </div>
 
+      <div class="mb-10">
+        <p class="text-sm text-gray-500">O conteúdo pedagógico apresentado neste curso foi elaborado com base nas referências: Estruturas de Dados e Seus Algoritmos (Szwarcfiter; Markezon, 1994) e Introduction to Algorithms (Cormen et al., 2001).</p>
+      </div>
+
       <div class="w-full max-w-lg rounded-lg bg-gray-100 p-6 flex transform transition duration-300 hover:shadow-xl hover:scale-[1.02] cursor-pointer">
         <div class="w-full">
           <p class="text-xl font-bold mb-2">Pratique ainda mais</p>
