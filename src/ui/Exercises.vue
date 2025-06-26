@@ -2,7 +2,7 @@
   <div class="w-full flex justify-center">
     <div class="w-full max-w-6xl p-6 sm:p-12 pt-24">
       <div class="flex items-center mb-4">
-        <BackButton :backFunction="goBack" :text="`Exercícios ${courseId}`"/>
+        <BackButton :backFunction="goBack" :text="`Exercícios de ${courseName}`"/>
       </div>
 
       <div class="w-full flex flex-col md:flex-row">
@@ -166,6 +166,11 @@
   const courseExercises = computed(() => {
     const course = exercises.find(c => c.id === courseId);
     return course ? course.exercises : [];
+  });
+
+  const courseName = computed(() => {
+    const course = exercises.find(c => c.id === courseId);
+    return course ? course.name : courseId;
   });
 
   const totalExercises = computed(() => courseExercises.value.length);

@@ -5,7 +5,7 @@
       <div class="w-full flex items-center mb-6">
         <BackButton text="Simulador de Árvores Binárias" class="mr-4" :backFunction="goBack" />
         
-        <Dialog>
+        <Dialog v-model:open="isDialogOpen">
           <DialogTrigger as-child>
             <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-200 cursor-pointer">
               <i class="pi pi-info-circle text-gray-600 text-sm" />
@@ -184,6 +184,7 @@
 
   const showPseudocode = ref(false);
   const currentOperation = ref('');
+  const isDialogOpen = ref(false);
 
   const toastStyle = {
     duration: 3000,
@@ -284,6 +285,7 @@
   });
 
   onMounted(() => {
+    isDialogOpen.value = true;
     if (!tree.value) return;
     initPanzoom();
   });

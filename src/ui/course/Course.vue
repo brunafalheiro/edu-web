@@ -14,7 +14,7 @@
     >
       <div
         v-if="!isFinishedCourse"
-        class="w-full max-w-[860px] h-full p-6 sm:p-12 pt-24"
+        class="w-full max-w-[860px] h-full p-6 sm:p-12 sm:pt-24"
       >
         <div class="flex items-center mb-2">
           <BackButton :backFunction="goToCourseInfo" :text="currentTopic.name"/>

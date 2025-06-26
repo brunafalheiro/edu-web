@@ -1,6 +1,7 @@
 [
   {
     "id": "binaryTree",
+    "name": "Árvores Binárias",
     "exercises": [
       {
         "id": "1",
@@ -31,6 +32,7 @@
   },
   {
     "id": "hashTable",
+    "name": "Tabelas Hash",
     "exercises": [
       {
         "id": "1",

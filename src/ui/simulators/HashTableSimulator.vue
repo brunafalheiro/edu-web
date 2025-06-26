@@ -3,9 +3,9 @@
     <Toaster richColors position="top-right" />
     <div class="w-full p-6 pt-20 mx-auto" style="height: calc(100vh - 120px)">
       <div class="w-full flex items-center mb-4">
-        <BackButton text="Simulador de Hash Tables" class="mr-4" :backFunction="goBack" />
+        <BackButton text="Simulador de Tabelas Hash" class="mr-4" :backFunction="goBack" />
         
-        <Dialog>
+        <Dialog v-model:open="isDialogOpen">
           <DialogTrigger as-child>
             <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-200 cursor-pointer">
               <i class="pi pi-info-circle text-gray-600 text-sm" />
@@ -13,7 +13,7 @@
           </DialogTrigger>
           <DialogContent class="sm:max-w-md">
             <DialogHeader class="mb-3">
-              <DialogTitle class="text-xl my-3">Como usar o Simulador de Hash Tables</DialogTitle>
+              <DialogTitle class="text-xl my-3">Como usar o Simulador de Tabelas Hash</DialogTitle>
               <DialogDescription>
                 <div class="space-y-4">
                   <p>Este simulador permite visualizar o funcionamento de diferentes implementações de tabelas hash:</p>
@@ -209,7 +209,7 @@
     NumberFieldInput,
   } from "@/components/ui/number-field";
   import Button from "@components/ui/button/Button.vue";
-  import { ref, computed } from "vue";
+  import { ref, computed, onMounted } from "vue";
   import { useRouter } from "vue-router";
   import { HashTableFunctions } from "@tools/hashTable";
   import { Toaster, toast } from 'vue-sonner';
@@ -237,6 +237,7 @@
   const isSearchedValue = ref(false);
   const searchedIndex = ref(null);
   const showValidation = ref(false);
+  const isDialogOpen = ref(false);
 
   const toastStyle = {
     background: '#fef2f2',
@@ -378,6 +379,10 @@
     collisionMethod.value = '';
     showValidation.value = false;
   };
+
+  onMounted(() => {
+    isDialogOpen.value = true;
+  });
 </script>
 
 <style scoped>
