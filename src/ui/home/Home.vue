@@ -25,6 +25,9 @@
       </div>
 
       <ToolsSection :tools="TOOLS" @tool-click="redirectTo" />
+      <div class="m-20">
+        <p class="text-sm text-gray-500">Desenvolvido por Bruna Falheiro como parte do Trabalho de Conclusão de Curso em Ciência da Computação pela Universidade Federal do Rio de Janeiro.</p>
+      </div>
     </div>
   </div>
 </template>
