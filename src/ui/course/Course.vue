@@ -234,9 +234,7 @@
     const isLastTopicFromClass = currentTopicIndex === topicsFromClass.value.length;
     const isLastClassFromCourse = currentClassIndex === classes.value.length;
     const isLastTopicFromCourse = isLastClassFromCourse && isLastTopicFromClass;
-    const courseCompleted = isCourseCompleted(completedContent);
 
-    // Mark current topic as completed
     if (!completedContent[classId]) {
       completedContent[classId] = [];
     }
@@ -244,6 +242,12 @@
       completedContent[classId][currentTopicIndex - 1] = { completed: false };
     }
     completedContent[classId][currentTopicIndex - 1].completed = true;
+
+    courseProgress.completedContent = completedContent;
+    progress[courseId] = courseProgress;
+    await updateProgress(progress);
+
+    const courseCompleted = isCourseCompleted(completedContent);
 
     if (courseCompleted && isLastTopicFromCourse) {
       isFinishedCourse.value = true;
